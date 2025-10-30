@@ -1,5 +1,5 @@
 # Use Python 3.11 slim image for smaller size
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM python:3.11-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -15,11 +15,9 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        gcc \
-        default-libmysqlclient-dev \
-        pkg-config \
-    && rm -rf /var/lib/apt/lists/*
+&& apt-get install -y --no-install-recommends \
+    curl \
+&& rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
